@@ -12,8 +12,8 @@ class App {
 
   async fetchData() {
     const data = await this.photographersApi.get();
-    this.allPhotographers = data.photographers.map(
-      (photograph) => new PhotographerFactory(photograph),
+    this.allPhotographers = data.photographers.map((photograph) =>
+      PhotographerFactory.createUser(photograph),
     );
   }
 

@@ -22,11 +22,11 @@ class App {
 
     if (localPhotographerData) {
       this.photographerData = {
-        photographers: localPhotographerData.photographers.map(
-          (photograph) => new PhotographerFactory(photograph),
+        photographers: localPhotographerData.photographers.map((photograph) =>
+          PhotographerFactory.createUser(photograph),
         ),
-        media: localPhotographerData.media.map(
-          (media) => new PhotographerFactory(media),
+        media: localPhotographerData.media.map((media) =>
+          PhotographerFactory.createMedia(media),
         ),
       };
     } else {

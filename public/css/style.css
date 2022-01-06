@@ -157,6 +157,7 @@ body {
   width: 170px;
   position: relative;
   text-align: left;
+  cursor: pointer;
 }
 .sorter__selected::after {
   content: "";
@@ -208,6 +209,7 @@ body {
   line-height: 23px;
   padding: 12px 20px;
   text-align: left;
+  cursor: pointer;
 }
 .sorter__list li + li::before {
   content: "";
@@ -433,6 +435,10 @@ body {
   background-color: #901c1c;
   border-radius: 5px;
   cursor: pointer;
+}
+.contact_button:hover {
+  background-color: #db8876;
+  color: black;
 }
 
 /*# sourceMappingURL=style.css.map */
