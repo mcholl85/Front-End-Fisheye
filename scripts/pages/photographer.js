@@ -141,7 +141,24 @@ class App {
       this.update();
     } else {
       media = this.sortingMedia(sorter);
+      const btnSelectedSorter = document.querySelector('.sorter__selected');
+      let sorterText;
+      switch (sorter) {
+        case 'like':
+          sorterText = 'Popularité';
+          break;
+        case 'date':
+          sorterText = 'Date';
+          break;
+        case 'title':
+          sorterText = 'Titre';
+          break;
+        default:
+          throw new Error('invalid sorter');
+      }
+      btnSelectedSorter.innerText = sorterText;
     }
+
     media.forEach((m) => {
       const DOM = m.mediaCard;
       this.$mediaWrapper.appendChild(DOM);
@@ -224,7 +241,7 @@ class App {
       await this.fetchData();
       this.displayHeader();
       this.displaySorter();
-      this.displayMedia(this.getSorter());
+      this.displayMedia();
       this.displayNameIntoForm();
     } catch (e) {
       console.log(e);
