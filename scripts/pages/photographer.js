@@ -98,7 +98,7 @@ class App {
           mediaById.decrementLikes();
         }
         this.saveLocalStorage();
-        this.displayMedia(this.getSorter());
+        this.displayMedia();
       });
     });
   }
@@ -167,7 +167,6 @@ class App {
           throw new Error('invalid sorter');
       }
       btnSelectedSorter.innerText = sorterText;
-      console.log(media);
     }
 
     media.forEach((m) => {
