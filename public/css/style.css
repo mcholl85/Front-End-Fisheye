@@ -326,17 +326,15 @@ body {
   white-space: nowrap;
   color: #901c1c;
   line-height: 31px;
+  font-size: 24px;
+  font-weight: 500;
 }
 .media__article__desc__title {
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: 24px;
 }
-.media__article__desc__like {
-  font-size: 24px;
-  font-weight: 500;
-}
-.media__article__desc__like button {
+.media__article__desc__like__icon {
   color: #901c1c;
   font-size: 22px;
 }

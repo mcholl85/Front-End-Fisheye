@@ -61,15 +61,15 @@
       white-space: nowrap;
       color: $primary-color;
       line-height: 31px;
+      font-size: 24px;
+      font-weight: 500;
       &__title {
         text-overflow: ellipsis;
         overflow: hidden;
         font-size: 24px;
       }
       &__like {
-        font-size: 24px;
-        font-weight: 500;
-        button {
+        &__icon {
           color: $primary-color;
           font-size: 22px;
         }

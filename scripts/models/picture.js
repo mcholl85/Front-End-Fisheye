@@ -14,21 +14,22 @@ export default class Picture extends Media {
     const article = document.createElement('article');
     article.classList.add('media__article');
     article.innerHTML = `
-          <a href="${this.link}" alt="${this.title}">
-            <img class="media__article__image" src="${this.link}" alt="${
+      <a href="${this.link}" alt="${this.title}">
+        <img class="media__article__image" src="${this.link}" alt="${
       this.title
     }">
-          </a>
-          <footer class="media__article__desc">
-            <h3 class="media__article__desc__title">${this.title}</h3>
-            <data id="${this.id}" value="${
+      </a>
+      <footer class="media__article__desc">
+        <h3 class="media__article__desc__title">${this.title}</h3>
+        <div class="media__article__desc__like">
+          <data id="${this.id}" value="${
       this.likes
-    }" class="media__article__desc__like">${this.likes}
-              <button>
-                <i class="${this.mediaLiked ? 'fas' : 'far'} fa-heart"></i>
-              </button>
-            </data>
-          </footer>
+    }" class="media__article__desc__like__value">${this.likes}</data>
+          <button class="media__article__desc__like__icon">
+            <i class="${this.mediaLiked ? 'fas' : 'far'} fa-heart"></i>
+          </button>
+        </div>
+      </footer>
         `;
     return article;
   }
