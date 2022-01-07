@@ -1,6 +1,7 @@
 import PhotographerFactory from '../factories/photographer.js';
 import Api from '../api/api.js';
 import Lightbox from '../utils/lightbox.js';
+import LocalStorage from '../utils/localStorage.js';
 
 class App {
   constructor() {
@@ -14,16 +15,13 @@ class App {
   }
 
   async fetchData() {
-    const localPhotographerData = JSON.parse(
-      localStorage.getItem('photographerData'),
-    );
-
-    if (localPhotographerData) {
+    const localData = LocalStorage.get();
+    if (localData) {
       this.photographerData = {
-        photographers: localPhotographerData.photographers.map((photograph) =>
+        photographers: localData.photographers.map((photograph) =>
           PhotographerFactory.createUser(photograph),
         ),
-        media: localPhotographerData.media.map((media) =>
+        media: localData.media.map((media) =>
           PhotographerFactory.createMedia(media),
         ),
       };
@@ -70,33 +68,6 @@ class App {
     return null;
   }
 
-  liked() {
-    document
-      .querySelectorAll('.media__article__desc__like__icon')
-      .forEach((elt) => {
-        const icon = elt.querySelector('i');
-
-        elt.addEventListener('click', () => {
-          const id = parseInt(elt.id, 10);
-          const mediaById = this.mediaByPhotographerID().find(
-            (media) => media.id === id,
-          );
-
-          if (icon.classList.contains('far')) {
-            icon.classList.replace('far', 'fas');
-            mediaById.mediaLiked = true;
-            mediaById.incrementLikes();
-          } else {
-            icon.classList.replace('fas', 'far');
-            mediaById.mediaLiked = false;
-            mediaById.decrementLikes();
-          }
-          this.saveLocalStorage();
-          this.displayMedia();
-        });
-      });
-  }
-
   getIdFromURL() {
     const params = this.url.searchParams;
     return parseInt(params.get('photographerId'), 10);
@@ -126,7 +97,6 @@ class App {
     } else if (this.sortingMedia(sorter) === null) {
       this.url.searchParams.delete('sorting');
       window.history.pushState({}, '', this.url);
-      this.update();
     } else {
       media = this.sortingMedia(sorter);
       const btnSelectedSorter = document.querySelector('.sorter__selected');
@@ -151,7 +121,6 @@ class App {
       const DOM = m.mediaCard;
       this.$mediaWrapper.appendChild(DOM);
     });
-    this.liked();
     PhotographerFactory.displaySumLikes();
     Lightbox.init();
   }
@@ -212,25 +181,13 @@ class App {
     return null;
   }
 
-  update() {
-    this.displayMedia();
-    Lightbox.init();
-  }
-
-  saveLocalStorage() {
-    localStorage.setItem(
-      'photographerData',
-      JSON.stringify(this.photographerData),
-    );
-  }
-
   async main() {
     try {
       await this.fetchData();
       this.displayUserInfos();
       this.displaySorter();
       this.displayMedia();
-      this.photographerByID().displaySumLikes();
+      LocalStorage.save(this.photographerData);
     } catch (e) {
       console.log(e);
     }
