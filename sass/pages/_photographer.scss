@@ -28,6 +28,10 @@
   & button {
     justify-self: center;
     align-self: center;
+    &:hover {
+      background-color: $secondary-color;
+      color: black;
+    }
   }
   & img {
     justify-self: flex-end;
@@ -65,8 +69,9 @@
       &__like {
         font-size: 24px;
         font-weight: 500;
-        svg {
-          cursor: pointer;
+        button {
+          color: $primary-color;
+          font-size: 22px;
         }
       }
     }
@@ -77,6 +82,7 @@
   position: fixed;
   bottom: 0;
   right: 40px;
+  font-size: 24px;
   background-color: $secondary-color;
   border-radius: 5px;
   padding: 20px 30px;
@@ -87,7 +93,6 @@
   }
   &__likes,
   &__price {
-    font-size: 24px;
     font-weight: 500;
     line-height: 31px;
   }

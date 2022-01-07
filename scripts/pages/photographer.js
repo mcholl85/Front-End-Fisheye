@@ -32,10 +32,12 @@ class App {
     } else {
       const data = await this.photographersApi.get();
       this.photographerData = {
-        photographers: data.photographers.map(
-          (photograph) => new PhotographerFactory(photograph),
+        photographers: data.photographers.map((photograph) =>
+          PhotographerFactory.createUser(photograph),
         ),
-        media: data.media.map((media) => new PhotographerFactory(media)),
+        media: data.media.map((media) =>
+          PhotographerFactory.createMedia(media),
+        ),
       };
     }
   }
@@ -81,12 +83,20 @@ class App {
   liked() {
     let id;
     document.querySelectorAll('.media__article__desc__like').forEach((elt) => {
-      elt.querySelector('svg').addEventListener('click', () => {
+      elt.querySelector('i').addEventListener('click', (e) => {
         id = parseInt(elt.id, 10);
         const mediaById = this.getMediaByPhotographerId().find(
           (media) => media.id === id,
         );
-        mediaById.incrementLikes();
+        if (e.target.classList.contains('far')) {
+          e.target.classList.replace('far', 'fas');
+          mediaById.mediaLiked = true;
+          mediaById.incrementLikes();
+        } else {
+          e.target.classList.replace('fas', 'far');
+          mediaById.mediaLiked = false;
+          mediaById.decrementLikes();
+        }
         this.saveLocalStorage();
         this.displayMedia(this.getSorter());
       });
@@ -157,6 +167,7 @@ class App {
           throw new Error('invalid sorter');
       }
       btnSelectedSorter.innerText = sorterText;
+      console.log(media);
     }
 
     media.forEach((m) => {
