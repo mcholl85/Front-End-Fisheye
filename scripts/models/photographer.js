@@ -31,9 +31,10 @@ export default class Photographer {
     return $wrapper;
   }
 
-  get userHeaderCard() {
+  displayHeader() {
     // Retourne le header du photographe
-    const headerDOM = `
+    const $wrapper = document.querySelector('.photograph-header');
+    const header = `
     <div class="photograph-header__desc">
       <h1 class="photograph-header__desc__name">${this.name}</h1>
       <h2 class="photograph-header__desc__city">${this.city}</h2>
@@ -44,6 +45,17 @@ export default class Photographer {
     </button>
     <img class="user" src="${this.getPortrait()}" alt="${this.name}" />`;
 
-    return headerDOM;
+    $wrapper.innerHTML = header;
+  }
+
+  displayPrice() {
+    const $wrapper = document.querySelector('.summary__price');
+    $wrapper.setAttribute('value', this.price);
+    $wrapper.innerText = `${this.price}€ / jour`;
+  }
+
+  displayNameInForm() {
+    const wrapper = document.querySelector('.modal header h2');
+    wrapper.innerHTML += `<br> ${this.name}`;
   }
 }

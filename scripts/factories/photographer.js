@@ -19,4 +19,14 @@ export default class PhotographerFactory {
     }
     throw new Error('Unknow type format');
   }
+
+  static displaySumLikes() {
+    const $wrapper = document.querySelector('.summary__likes');
+    const arrayLikes = Array.from(
+      document.querySelectorAll('.media__article__desc__like__value'),
+    ).map((data) => parseInt(data.value, 10));
+    const sumLikes = arrayLikes.reduce((a, b) => a + b);
+
+    $wrapper.innerText = sumLikes;
+  }
 }

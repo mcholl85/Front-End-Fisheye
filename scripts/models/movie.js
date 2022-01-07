@@ -25,10 +25,10 @@ export default class Movie extends Media {
     <footer class="media__article__desc">
       <h3 class="media__article__desc__title">${this.title}</h3>
       <div class="media__article__desc__like">
-        <data id="${this.id}" value="${
+        <data value="${this.likes}" class="media__article__desc__like__value">${
       this.likes
-    }" class="media__article__desc__like__value">${this.likes}</data>
-        <button class="media__article__desc__like__icon">
+    }</data>
+        <button id="${this.id}" class="media__article__desc__like__icon">
           <i class="${this.mediaLiked ? 'fas' : 'far'} fa-heart"></i>
         </button>
       </div>
