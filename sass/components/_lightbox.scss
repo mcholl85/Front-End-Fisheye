@@ -6,10 +6,11 @@
   height: 100%;
   background-color: white;
   z-index: 10;
-  button {
+  &__next,
+  &__prev,
+  &__close {
     margin: 0 100px;
     cursor: pointer;
-    background-color: unset;
   }
   &__next,
   &__prev {

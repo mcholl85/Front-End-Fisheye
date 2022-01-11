@@ -5,6 +5,7 @@ export default class Lightbox {
     const titles = links.map((title) => title.getAttribute('alt'));
     links.forEach((link) =>
       link.addEventListener('click', (e) => {
+        document.getElementById('main').setAttribute('aria-hidden', 'true');
         e.preventDefault();
         document.querySelector('body').classList.add('noscroll');
         const lightbox = new Lightbox(
@@ -33,27 +34,23 @@ export default class Lightbox {
 
   buildDOM() {
     const dom = document.createElement('div');
+    dom.setAttribute('role', 'dialog');
+    dom.setAttribute('aria-label', 'image closeup view');
     dom.classList.add('lightbox');
     dom.innerHTML = `
-      <button class="lightbox__close">
-        <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <title>Close dialog</title>
+        <svg class="lightbox__close" role="button" aria-describedby="title" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <title id="title">Close dialog</title>
           <path d="M42 4.23L37.77 0L21 16.77L4.23 0L0 4.23L16.77 21L0 37.77L4.23 42L21 25.23L37.77 42L42 37.77L25.23 21L42 4.23Z" fill="#911C1C"/>
         </svg>
-      </button>
-      <button class="lightbox__next">
-        <svg width="30" height="48" viewBox="0 0 30 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <title>Next image</title>
+        <svg class="lightbox__next" role="link" aria-describedby="title"  width="30" height="48" viewBox="0 0 30 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <title id="title">Next image</title>
           <path d="M0.360108 5.64L18.6801 24L0.360107 42.36L6.00011 48L30.0001 24L6.00011 3.88195e-06L0.360108 5.64Z" fill="#911C1C"/>
         </svg>
-      </button>
-      <button class="lightbox__prev">
-        <svg width="30" height="48" viewBox="0 0 30 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <title>Previous image</title>
+        <svg class="lightbox__prev" role="link" aria-describedby="title"  width="30" height="48" viewBox="0 0 30 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <title id="title">Previous image</title>
           <path d="M29.6399 42.36L11.3199 24L29.6399 5.64L23.9999 -2.46532e-07L-0.000107861 24L23.9999 48L29.6399 42.36Z" fill="#911C1C"/>
         </svg>
-      </button>
-      <div class="lightbox__container" aria-label="image closeup view">
+      <div class="lightbox__container">
         <figure class="lightbox__container__figure">
         </figure>
       </div>
@@ -140,6 +137,7 @@ export default class Lightbox {
     e.preventDefault();
     this.element.parentElement.removeChild(this.element);
     document.querySelector('body').classList.remove('noscroll');
+    document.getElementById('main').setAttribute('aria-hidden', 'false');
     document.removeEventListener('keyup', this.onKeyUp);
   }
 }

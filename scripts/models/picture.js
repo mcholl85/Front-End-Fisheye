@@ -17,7 +17,7 @@ export default class Picture extends Media {
       <a href="${this.link}" alt="${this.title}">
         <img class="media__article__image" src="${this.link}" alt="${
       this.title
-    }">
+    }, vue rapprochée">
       </a>
       <footer class="media__article__desc">
         <h3 class="media__article__desc__title">${this.title}</h3>
@@ -25,9 +25,9 @@ export default class Picture extends Media {
           <data value="${
             this.likes
           }" class="media__article__desc__like__value">${this.likes}</data>
-          <button class="media__article__desc__like__icon">
-            <i class="${this.mediaLiked ? 'fas' : 'far'} fa-heart"></i>
-          </button>
+          <i class="${
+            this.mediaLiked ? 'fas' : 'far'
+          } fa-heart media__article__desc__like__icon" aria-label="likes"></i>
         </div>
       </footer>
         `;

@@ -47,40 +47,35 @@ class App {
   }
 
   async main() {
-    try {
-      await this.fetchData();
+    await this.fetchData();
 
-      const mediaPhotographer = PhotographerFactory.getMediaByPhotographerId(
-        this.photographerData.media,
-        this.id,
-      );
-      const photograph = PhotographerFactory.getPhotographerById(
+    const mediaPhotographer = PhotographerFactory.getMediaByPhotographerId(
+      this.photographerData.media,
+      this.id,
+    );
+    const photograph = PhotographerFactory.getPhotographerById(
+      this.photographerData.photographers,
+      this.id,
+    );
+    let sorter = this.getSorterFromURL();
+
+    if (photograph != null) {
+      PhotographerFactory.displayInfosPhotographer(
         this.photographerData.photographers,
         this.id,
       );
-      let sorter = this.getSorterFromURL();
-
-      if (photograph != null) {
-        PhotographerFactory.displayInfosPhotographer(
-          this.photographerData.photographers,
-          this.id,
-        );
-      } else {
-        window.location.replace(window.location.origin);
-      }
-      if (!['like', 'date', 'title'].includes(sorter)) {
-        this.url.searchParams.set('sorting', 'like');
-        window.history.pushState({}, '', this.url);
-        sorter = 'like';
-      }
-
-      const sorting = new Sorter(mediaPhotographer, sorter);
-      sorting.loadButton();
-      sorting.displaySorter();
-      LocalStorage.save(this.photographerData);
-    } catch (e) {
-      console.log(e);
+    } else {
+      window.location.replace(window.location.origin);
     }
+    if (!['like', 'date', 'title'].includes(sorter)) {
+      this.url.searchParams.set('sorting', 'like');
+      window.history.pushState({}, '', this.url);
+      sorter = 'like';
+    }
+
+    const sorting = new Sorter(mediaPhotographer, sorter);
+    sorting.displaySorter();
+    LocalStorage.save(this.photographerData);
   }
 }
 

@@ -20,7 +20,7 @@ export default class Movie extends Media {
     article.innerHTML = `<a href="${this.link}" alt="${this.title}">
       <video class="media__article__video" autobuffer=true src="${
         this.link
-      }" alt="${this.title}" poster="${linkThumbnail}"></video>
+      }" alt="${this.title}, vue rapprochée" poster="${linkThumbnail}"></video>
     </a>
     <footer class="media__article__desc">
       <h3 class="media__article__desc__title">${this.title}</h3>
@@ -28,9 +28,9 @@ export default class Movie extends Media {
         <data value="${this.likes}" class="media__article__desc__like__value">${
       this.likes
     }</data>
-        <button class="media__article__desc__like__icon">
-          <i class="${this.mediaLiked ? 'fas' : 'far'} fa-heart"></i>
-        </button>
+        <i class="${
+          this.mediaLiked ? 'fas' : 'far'
+        } fa-heart media__article__desc__like__icon" aria-label="likes"></i>
       </div>
     </footer>
         `;

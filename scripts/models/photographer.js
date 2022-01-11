@@ -55,7 +55,7 @@ export default class Photographer {
   }
 
   displayNameInForm() {
-    const wrapper = document.querySelector('.modal header h2');
+    const wrapper = document.querySelector('.modal header h1');
     wrapper.innerHTML += `<br> ${this.name}`;
   }
 }

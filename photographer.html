@@ -11,7 +11,7 @@
     <title>Fisheye - photographe</title>
   </head>
   <body>
-    <header class="heading">
+    <header class="heading" role="banner">
       <a href="./">
         <img
           src="assets/images/logo.png"
@@ -23,18 +23,26 @@
     <main id="main">
       <header class="photograph-header"></header>
       <section class="sorter">
-        <p class="sorter__desc">Trier par</p>
-        <button class="sorter__selected">Popularité</button>
-        <ul class="sorter__list">
-          <li>
-            <button value="like" name="sorter">Popularité</button>
-          </li>
-          <li>
-            <button value="date" name="sorter">Date</button>
-          </li>
-          <li>
-            <button value="title" name="sorter">Titre</button>
-          </li>
+        <p id="sorterDesc" class="sorter__desc">Trier par</p>
+        <button
+          role="button"
+          aria-haspopup="listbox"
+          aria-expanded="false"
+          aria-controls="sorterList"
+          aria-labelledby="sorterDesc"
+          class="sorter__selected"
+        >
+          Popularité
+        </button>
+        <ul
+          id="sorterList"
+          role="listbox"
+          class="sorter__list"
+          aria-labelledby="sorterDesc"
+        >
+          <li role="option" id="like" name="sorter">Popularité</li>
+          <li role="option" id="date" name="sorter">Date</li>
+          <li role="option" id="title" name="sorter">Titre</li>
         </ul>
       </section>
       <section class="media"></section>
@@ -45,29 +53,45 @@
       </aside>
     </main>
     <section id="contact_modal">
-      <div class="modal">
-        <header class="modal__heading">
-          <h2 class="modal__heading__title">Contactez-moi</h2>
+      <div class="modal" role="dialog" aria-labelledby="titleForm">
+        <header id="titleForm" class="modal__heading">
+          <h1 class="modal__heading__title">Contactez-moi</h1>
           <button
             class="modal__heading__picture"
             onclick="closeModal()"
             alt="Close form"
           >
-            <img src="assets/icons/close.svg" />
+            <img src="assets/icons/close.svg" alt="close img" />
           </button>
         </header>
         <form id="contact" name="contact" onsubmit="validate(event);">
           <div class="formData">
             <label for="firstname">Prénom</label>
-            <input id="firstname" name="firtname" class="text-control" />
+            <input
+              id="firstname"
+              name="firtname"
+              class="text-control"
+              required
+            />
           </div>
           <div class="formData">
             <label for="lastname">Nom</label>
-            <input id="lastname" name="lastname" class="text-control" />
+            <input
+              id="lastname"
+              name="lastname"
+              class="text-control"
+              required
+            />
           </div>
           <div class="formData">
             <label for="email">Email</label>
-            <input id="email" type="email" name="email" class="text-control" />
+            <input
+              id="email"
+              type="email"
+              name="email"
+              class="text-control"
+              required
+            />
           </div>
           <div class="formData">
             <label for="message">Votre message</label>
@@ -76,6 +100,7 @@
               name="message"
               rows="3"
               class="text-control"
+              required
             ></textarea>
           </div>
           <button class="contact_button" type="submit">Envoyer</button>

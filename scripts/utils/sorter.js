@@ -49,14 +49,21 @@ export default class Sorter {
     const btnSelectedSorter = document.querySelector('.sorter__selected');
     const listSorter = document.querySelector('.sorter__list');
 
+    listSorter.setAttribute('aria-activedescendant', this.sorter);
     btnSelectedSorter.innerText = sorterName;
     btnSelectedSorter.addEventListener('click', (e) => {
       e.target.style.display = 'none';
+      e.target.setAttribute('aria-expanded', 'true');
       listSorter.style.display = 'block';
     });
     this.$sorterWrapper.forEach((element) => {
+      if (element.id === this.sorter) {
+        element.setAttribute('aria-selected', 'true');
+      } else {
+        element.setAttribute('aria-selected', 'false');
+      }
       element.addEventListener('click', (e) => {
-        this.sorter = e.target.value;
+        this.sorter = e.target.id;
         this.media = this.mediaSorted();
 
         url.searchParams.set('sorting', this.sorter);
@@ -64,6 +71,7 @@ export default class Sorter {
         btnSelectedSorter.innerText = this.getSorterName(this.sorter);
         listSorter.style.display = 'none';
         btnSelectedSorter.style.display = 'block';
+        btnSelectedSorter.setAttribute('aria-expanded', 'false');
 
         this.displaySorter();
       });
@@ -71,6 +79,7 @@ export default class Sorter {
   }
 
   displaySorter() {
+    this.loadButton();
     PhotographerFactory.displayMedia(this.mediaSorted());
   }
 }
