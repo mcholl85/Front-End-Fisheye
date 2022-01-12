@@ -2,10 +2,13 @@ function displayModal() {
   const modal = document.getElementById('contact_modal');
   const body = document.querySelector('body');
   const main = document.getElementById('main');
+  const firstNmame = document.getElementById('firstname');
   main.setAttribute('aria-hidden', 'true');
   modal.setAttribute('aria-hidden', 'false');
   body.classList.add('noscroll');
   modal.style.display = 'block';
+  firstNmame.focus();
+
   document.addEventListener('keyup', (e) => {
     if (e.key === 'Escape') {
       this.closeModal();

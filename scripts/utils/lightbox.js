@@ -5,9 +5,8 @@ export default class Lightbox {
     const titles = links.map((title) => title.getAttribute('alt'));
     links.forEach((link) =>
       link.addEventListener('click', (e) => {
-        document.getElementById('main').setAttribute('aria-hidden', 'true');
+        document.getElementById('main').setAttribute('hidden', '');
         e.preventDefault();
-        document.querySelector('body').classList.add('noscroll');
         const lightbox = new Lightbox(
           e.currentTarget.getAttribute('href'),
           media,
@@ -142,8 +141,7 @@ export default class Lightbox {
   close(e) {
     e.preventDefault();
     this.element.parentElement.removeChild(this.element);
-    document.querySelector('body').classList.remove('noscroll');
-    document.getElementById('main').setAttribute('aria-hidden', 'false');
+    document.getElementById('main').removeAttribute('hidden');
     document.removeEventListener('keyup', this.onKeyUp);
   }
 }
