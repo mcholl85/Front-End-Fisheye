@@ -49,6 +49,7 @@ export default class Sorter {
     const btnSelectedSorter = document.querySelector('.sorter__selected');
     const listSorter = document.querySelector('.sorter__list');
 
+    btnSelectedSorter.innerText = this.getSorterName(this.sorter);
     listSorter.setAttribute('aria-activedescendant', this.sorter);
     btnSelectedSorter.innerText = sorterName;
     btnSelectedSorter.addEventListener('click', (e) => {
@@ -68,7 +69,6 @@ export default class Sorter {
 
         url.searchParams.set('sorting', this.sorter);
         window.history.pushState({}, '', url);
-        btnSelectedSorter.innerText = this.getSorterName(this.sorter);
         listSorter.style.display = 'none';
         btnSelectedSorter.style.display = 'block';
         btnSelectedSorter.setAttribute('aria-expanded', 'false');
