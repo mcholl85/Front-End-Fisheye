@@ -1,12 +1,15 @@
 export default class Lightbox {
+  // init collects links & titles of all media
+  // & initializes Lightbox when a link is clicked
   static init() {
     const links = Array.from(document.querySelectorAll('.media__article a'));
     const media = links.map((link) => link.getAttribute('href'));
     const titles = links.map((title) => title.getAttribute('alt'));
+
     links.forEach((link) =>
       link.addEventListener('click', (e) => {
-        document.getElementById('main').setAttribute('hidden', '');
         e.preventDefault();
+        document.getElementById('main').setAttribute('hidden', ''); // hide the element main
         const lightbox = new Lightbox(
           e.currentTarget.getAttribute('href'),
           media,
@@ -17,6 +20,7 @@ export default class Lightbox {
     );
   }
 
+  // create a Lightbox
   constructor(url, media, title, titles) {
     this.titles = titles;
     this.element = this.buildDOM();
@@ -27,12 +31,15 @@ export default class Lightbox {
     document.addEventListener('keyup', this.onKeyUp);
   }
 
+  // getExtensionUrl takes a url and returns its extension
   static getExtensionUrl(url) {
     return url.split('.').pop();
   }
 
+  // builDOM returns a DOM's Lightbox
   buildDOM() {
     const dom = document.createElement('div');
+
     dom.setAttribute('role', 'dialog');
     dom.setAttribute('aria-label', 'image closeup view');
     dom.classList.add('lightbox');
@@ -60,21 +67,27 @@ export default class Lightbox {
         </figure>
       </div>
       `;
+    // link to close the lightbox
     dom
       .querySelector('.lightbox__close')
       .addEventListener('click', this.close.bind(this));
+    // link to the next media
     dom
       .querySelector('.lightbox__next')
       .addEventListener('click', this.next.bind(this));
+    // link to the previous media
     dom
       .querySelector('.lightbox__prev')
       .addEventListener('click', this.prev.bind(this));
     return dom;
   }
 
+  // loadMedia takes the link & the title of the media
+  // build either an image or a video
   loadMedia(url, title) {
     this.url = null;
     const figure = this.element.querySelector('.lightbox__container__figure');
+
     figure.innerHTML = '';
     if (Lightbox.getExtensionUrl(url) === 'mp4') {
       figure.classList.add('lightbox__container__figure--mp4');
@@ -108,6 +121,7 @@ export default class Lightbox {
     this.url = url;
   }
 
+  // next display the next media
   next(e) {
     e.preventDefault();
     let i = this.media.findIndex((media) => media === this.url);
@@ -117,6 +131,7 @@ export default class Lightbox {
     this.loadMedia(this.media[i + 1], this.titles[i + 1]);
   }
 
+  // prev display the previous media
   prev(e) {
     e.preventDefault();
     let i = this.media.findIndex((media) => media === this.url);
@@ -126,6 +141,7 @@ export default class Lightbox {
     this.loadMedia(this.media[i - 1], this.titles[i - 1]);
   }
 
+  // onKeyUp add functions to keys
   onKeyUp(e) {
     e.preventDefault();
 
@@ -138,6 +154,7 @@ export default class Lightbox {
     }
   }
 
+  // close the modal Lightbox & display the main
   close(e) {
     e.preventDefault();
     this.element.parentElement.removeChild(this.element);

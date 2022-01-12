@@ -1,17 +1,22 @@
 import Media from './media.js';
 
 export default class Picture extends Media {
+  // create a Picture
   constructor(data) {
     super(data);
     this.image = data.image;
   }
 
+  // get the url of the picture
   get link() {
     return `./assets/images/${this.image}`;
   }
 
+  // mediaCard retrieves the Picture properties to build a element card
+  // and return it
   get mediaCard() {
     const article = document.createElement('article');
+
     article.classList.add('media__article');
     article.innerHTML = `
       <a href="${this.link}" alt="${this.title}">
@@ -31,7 +36,6 @@ export default class Picture extends Media {
         </div>
       </footer>
         `;
-    this.getLiked(article);
     return article;
   }
 }

@@ -1,12 +1,14 @@
 import PhotographerFactory from '../factories/photographer.js';
 
 export default class Sorter {
+  // create a sorter
   constructor(media, sorter) {
     this.media = media;
     this.sorter = sorter;
     this.$sorterWrapper = document.getElementsByName('sorter');
   }
 
+  // mediaSorted returns a object array based on the sorter value
   mediaSorted() {
     if (this.sorter === 'like') {
       return Array.from(this.media).sort((a, b) => b.likes - a.likes);
@@ -24,6 +26,7 @@ export default class Sorter {
     return null;
   }
 
+  // getSorterName returns the name of the sort
   getSorterName() {
     let sorterText;
 
@@ -43,28 +46,33 @@ export default class Sorter {
     return sorterText;
   }
 
+  // loadButton the DOM of the sort
   loadButton() {
     const url = new URL(document.location);
     const sorterName = this.getSorterName(this.sorter);
     const btnSelectedSorter = document.querySelector('.sorter__selected');
     const listSorter = document.querySelector('.sorter__list');
 
-    btnSelectedSorter.innerText = this.getSorterName(this.sorter);
-    listSorter.setAttribute('aria-activedescendant', this.sorter);
+    // load the name of the sort
     btnSelectedSorter.innerText = sorterName;
+    listSorter.setAttribute('aria-activedescendant', this.sorter);
 
     btnSelectedSorter.addEventListener('click', (e) => {
-      e.target.style.display = 'none';
+      e.target.style.display = 'none'; // hide the button
       e.target.setAttribute('aria-expanded', 'true');
-      listSorter.style.display = 'block';
-      document.getElementById('like').focus();
+      listSorter.style.display = 'block'; // show the list of sort
+      document.getElementById('like').focus(); // focus the first elt of the list
     });
     this.$sorterWrapper.forEach((element) => {
+      // select the active sorter
       if (element.id === this.sorter) {
         element.setAttribute('aria-selected', 'true');
       } else {
         element.setAttribute('aria-selected', 'false');
       }
+
+      // when sorter is selected, media are sorted
+      // change sorting's params url and refresh the DOM
       element.addEventListener('click', (e) => {
         this.sorter = e.target.id;
         this.media = this.mediaSorted();
@@ -72,6 +80,7 @@ export default class Sorter {
         url.searchParams.set('sorting', this.sorter);
         window.history.pushState({}, '', url);
 
+        // hide the list and show the button
         listSorter.style.display = 'none';
         btnSelectedSorter.style.display = 'block';
         btnSelectedSorter.setAttribute('aria-expanded', 'false');
@@ -82,6 +91,7 @@ export default class Sorter {
     });
   }
 
+  // display sorter and gallery media sorted
   displaySorter() {
     this.loadButton();
     PhotographerFactory.displayMedia(this.mediaSorted());

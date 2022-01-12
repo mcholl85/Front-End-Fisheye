@@ -1,6 +1,7 @@
 import PhotographerFactory from '../factories/photographer.js';
 
 export default class Media {
+  // Create a media
   constructor(data) {
     this.id = data.id;
     this.photographerId = data.photographerId;
@@ -19,11 +20,14 @@ export default class Media {
     this.likes -= 1;
   }
 
+  // displayLike takes an DOM mediaCard and display the data "likes"
   displayLike(mediaCard) {
     const $wrapper = mediaCard.querySelector('data');
     $wrapper.innerText = this.likes;
   }
 
+  // getLiked takes an DOM mediaCard
+  // add or remove a "like" when click on the icon
   getLiked(mediaCard) {
     const icon = mediaCard.querySelector('i');
 
@@ -39,8 +43,8 @@ export default class Media {
           this.mediaLiked = false;
           this.decrementLikes();
         }
-        this.displayLike(mediaCard);
-        PhotographerFactory.displaySumLikes();
+        this.displayLike(mediaCard); // reload the value of the like
+        PhotographerFactory.displaySumLikes(); // Change the values of the like's sum
       });
   }
 }

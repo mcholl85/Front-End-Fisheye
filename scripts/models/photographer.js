@@ -1,4 +1,5 @@
 export default class Photographer {
+  // create a Photographer
   constructor(data) {
     this.name = data.name;
     this.id = data.id;
@@ -9,12 +10,15 @@ export default class Photographer {
     this.portrait = data.portrait;
   }
 
+  // get the url of the photographer's portrait
   getPortrait() {
     return `./assets/photographers/${this.portrait}`;
   }
 
+  // userCard builds an element card with Photographer's properties
+  // and return it
   get userCard() {
-    const $wrapper = document.createElement('article');
+    const article = document.createElement('article');
     const photographCard = `
       <a href="./photographer.html?photographerId=${this.id}"  alt="${
       this.name
@@ -26,13 +30,13 @@ export default class Photographer {
       <p class="tagline">${this.tagline}</p>
       <p class="price">${this.price}€/jour</p>
       `;
-    $wrapper.innerHTML = photographCard;
+    article.innerHTML = photographCard;
 
-    return $wrapper;
+    return article;
   }
 
+  // displayHeader build the photographer's header and insert into it
   displayHeader() {
-    // Retourne le header du photographe
     const $wrapper = document.querySelector('.photograph-header');
     const header = `
     <div class="photograph-header__desc">
@@ -48,12 +52,14 @@ export default class Photographer {
     $wrapper.innerHTML = header;
   }
 
+  // displayPrice takes the photographer's price to display into the summary element
   displayPrice() {
     const $wrapper = document.querySelector('.summary__price');
     $wrapper.setAttribute('value', this.price);
     $wrapper.innerText = `${this.price}€ / jour`;
   }
 
+  // displayNameInForm takes the photographer's name to display into the header's form
   displayNameInForm() {
     const wrapper = document.querySelector('.modal header h1');
     wrapper.innerHTML += `<br> ${this.name}`;

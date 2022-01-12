@@ -1,14 +1,19 @@
+// displayModal opens the form's modal
 function displayModal() {
   const modal = document.getElementById('contact_modal');
   const body = document.querySelector('body');
   const main = document.getElementById('main');
   const firstNmame = document.getElementById('firstname');
+
+  // hide non-interactive content from the accessibility API
   main.setAttribute('aria-hidden', 'true');
   modal.setAttribute('aria-hidden', 'false');
-  body.classList.add('noscroll');
-  modal.style.display = 'block';
+
+  body.classList.add('noscroll'); // hide scrollbar
+  modal.style.display = 'block'; // display the modal
   firstNmame.focus();
 
+  // add the possibility to close with the space key
   document.addEventListener('keyup', (e) => {
     if (e.key === 'Escape') {
       this.closeModal();
@@ -16,16 +21,21 @@ function displayModal() {
   });
 }
 
+// closeModal close the form's modal
 function closeModal() {
   const modal = document.getElementById('contact_modal');
   const body = document.querySelector('body');
   const main = document.getElementById('main');
+
+  // hide non-interactive content from the accessibility API
   main.setAttribute('aria-hidden', 'false');
   modal.setAttribute('aria-hidden', 'true');
+
   body.classList.remove('noscroll');
-  modal.style.display = 'none';
+  modal.style.display = 'none'; // hide the modal
 }
 
+// removeMsgError if msgError exists
 function removeMsgError(element) {
   if (element.parentElement.hasAttribute('data-error')) {
     element.parentElement.removeAttribute('data-error');
@@ -33,6 +43,7 @@ function removeMsgError(element) {
   }
 }
 
+// setMsgError uses the css properties to display errors
 function setMsgError(element, name) {
   element.parentElement.setAttribute(
     'data-error',
@@ -41,22 +52,30 @@ function setMsgError(element, name) {
   element.parentElement.setAttribute('data-error-visible', 'true');
 }
 
+// firstNameIsValid checks if firstname has at least 2 letters
+// return boolean
 function firstNameIsValid(firstname) {
   const regName = /^[A-zÀ-ú -]{2,}$/;
   return regName.test(firstname.value);
 }
 
+// lastNameIsValid checks if firstname has at least 2 letters
+// return boolean
 function lastNameIsValid(lastname) {
   const regName = /^[A-zÀ-ú -]{2,}$/;
   return regName.test(lastname.value);
 }
 
+// emailIsValid checks if email is valid
+// return boolean
 function emailIsValid(email) {
   const regEmail =
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return regEmail.test(email.value);
 }
 
+// messageIsValid checks if message is not empty
+// return boolean
 function messageIsValid(message) {
   if (message.value !== '') {
     return true;
@@ -64,6 +83,8 @@ function messageIsValid(message) {
   return false;
 }
 
+// validate checks if all inputs values are valid
+// send the response in the console
 function validate(event) {
   event.preventDefault();
 
@@ -103,6 +124,6 @@ function validate(event) {
 Voici votre message :
 ${message.value}`);
     closeModal();
-    form.reset();
+    form.reset(); // erase all input's values
   }
 }

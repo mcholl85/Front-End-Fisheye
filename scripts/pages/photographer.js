@@ -11,6 +11,8 @@ class App {
     this.photographerData = {};
   }
 
+  // fetchData collects data in localStorage
+  // if null, get from the json with the module Api
   async fetchData() {
     const localData = LocalStorage.get();
     if (localData) {
@@ -35,11 +37,13 @@ class App {
     }
   }
 
+  // getIdFromURL returns the value of 'photographerId' from the url
   getIdFromURL() {
     const params = this.url.searchParams;
     return parseInt(params.get('photographerId'), 10);
   }
 
+  // getSorterFromURL return the value of 'sorting' from the url
   getSorterFromURL() {
     const params = this.url.searchParams;
     return params.get('sorting');
@@ -58,6 +62,7 @@ class App {
     );
     let sorter = this.getSorterFromURL();
 
+    // if photographerId does not exit, user is redirected to the homepage
     if (photograph != null) {
       PhotographerFactory.displayInfosPhotographer(
         this.photographerData.photographers,
@@ -66,14 +71,18 @@ class App {
     } else {
       window.location.replace(window.location.origin);
     }
+
+    // if the value of sorter is wrong, user is redirected to the default sorter : like
     if (!['like', 'date', 'title'].includes(sorter)) {
       this.url.searchParams.set('sorting', 'like');
       window.history.pushState({}, '', this.url);
       sorter = 'like';
     }
 
+    // launch the module sorter
     const sorting = new Sorter(mediaPhotographer, sorter);
     sorting.displaySorter();
+
     LocalStorage.save(this.photographerData);
   }
 }
