@@ -25,9 +25,9 @@ export default class Picture extends Media {
           <data value="${
             this.likes
           }" class="media__article__desc__like__value">${this.likes}</data>
-          <i class="${
-            this.mediaLiked ? 'fas' : 'far'
-          } fa-heart media__article__desc__like__icon" aria-label="likes"></i>
+          <button class="media__article__desc__like__icon" aria-label="likes">
+            <i class="${this.mediaLiked ? 'fas' : 'far'} fa-heart"></i>
+          </button>
         </div>
       </footer>
         `;

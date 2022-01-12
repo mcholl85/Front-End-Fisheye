@@ -52,10 +52,12 @@ export default class Sorter {
     btnSelectedSorter.innerText = this.getSorterName(this.sorter);
     listSorter.setAttribute('aria-activedescendant', this.sorter);
     btnSelectedSorter.innerText = sorterName;
+
     btnSelectedSorter.addEventListener('click', (e) => {
       e.target.style.display = 'none';
       e.target.setAttribute('aria-expanded', 'true');
       listSorter.style.display = 'block';
+      document.getElementById('like').focus();
     });
     this.$sorterWrapper.forEach((element) => {
       if (element.id === this.sorter) {
@@ -69,9 +71,11 @@ export default class Sorter {
 
         url.searchParams.set('sorting', this.sorter);
         window.history.pushState({}, '', url);
+
         listSorter.style.display = 'none';
         btnSelectedSorter.style.display = 'block';
         btnSelectedSorter.setAttribute('aria-expanded', 'false');
+        btnSelectedSorter.focus();
 
         this.displaySorter();
       });

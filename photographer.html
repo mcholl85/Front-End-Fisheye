@@ -25,24 +25,27 @@
       <section class="sorter">
         <p id="sorterDesc" class="sorter__desc">Trier par</p>
         <button
-          role="button"
           aria-haspopup="listbox"
           aria-expanded="false"
           aria-controls="sorterList"
           aria-labelledby="sorterDesc"
           class="sorter__selected"
-        >
-          Popularité
-        </button>
+        ></button>
         <ul
           id="sorterList"
           role="listbox"
           class="sorter__list"
           aria-labelledby="sorterDesc"
         >
-          <li role="option" id="like" name="sorter">Popularité</li>
-          <li role="option" id="date" name="sorter">Date</li>
-          <li role="option" id="title" name="sorter">Titre</li>
+          <li>
+            <button role="option" id="like" name="sorter">Popularité</button>
+          </li>
+          <li>
+            <button role="option" id="date" name="sorter">Date</button>
+          </li>
+          <li>
+            <button role="option" id="title" name="sorter">Titre</button>
+          </li>
         </ul>
       </section>
       <section class="media"></section>
