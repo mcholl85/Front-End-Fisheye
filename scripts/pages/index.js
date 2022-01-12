@@ -4,14 +4,11 @@ import Api from '../api/api.js';
 class App {
   constructor() {
     this.$photographWrapper = document.querySelector('.photographer-section');
-
-    this.photographersApi = new Api('./data/photographers.json');
-
     this.allPhotographers = [];
   }
 
   async fetchData() {
-    const data = await this.photographersApi.get();
+    const data = await Api.getData();
     this.allPhotographers = data.photographers.map((photograph) =>
       PhotographerFactory.createUser(photograph),
     );

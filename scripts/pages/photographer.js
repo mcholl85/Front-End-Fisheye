@@ -5,7 +5,6 @@ import Sorter from '../utils/sorter.js';
 
 class App {
   constructor() {
-    this.photographersApi = new Api('./data/photographers.json');
     this.url = new URL(document.location);
     this.id = this.getIdFromURL();
 
@@ -24,7 +23,7 @@ class App {
         ),
       };
     } else {
-      const data = await this.photographersApi.get();
+      const data = await Api.getData();
       this.photographerData = {
         photographers: data.photographers.map((photograph) =>
           PhotographerFactory.createUser(photograph),

@@ -1,10 +1,8 @@
 export default class Api {
-  constructor(url) {
-    this.url = url;
-  }
-
-  get() {
-    return fetch(this.url)
+  // get all the data from json
+  static async getData() {
+    const url = './data/photographers.json';
+    return fetch(url)
       .then((res) => res.json())
       .catch((err) => console.log('an error occurs', err));
   }
