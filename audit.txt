@@ -1,0 +1,15 @@
+
+127.0.0.1:5500/photographer.html?photographerId=82&sorting=like
+
+  ✖ ARIA state and property values must be valid
+
+  #main > .sorter > .sorter__selected
+
+
+  ✔ This element does not support ARIA roles, states and properties
+  ✔ Elements with ARIA roles must be in the correct scope
+  ✔ This element has an invalid ARIA attribute
+  ✔ Elements with ARIA roles must use a valid, non-abstract ARIA role
+  ✔ Controls and media elements should have labels
+  ✔ Any ID referred to via an IDREF must be unique in the DOM
+

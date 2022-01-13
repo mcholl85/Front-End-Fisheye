@@ -23,13 +23,15 @@
     <main id="main">
       <header class="photograph-header"></header>
       <section class="sorter">
-        <p id="sorterDesc" class="sorter__desc">Trier par</p>
+        <span id="sorterDesc" class="sorter__desc">Trier par</span>
         <button
-          aria-haspopup="listbox"
+          role="combobox"
+          aria-autocomplete="list"
           aria-expanded="false"
           aria-controls="sorterList"
-          aria-labelledby="sorterDesc"
+          aria-labelledby="sorterDesc sorterBtn"
           class="sorter__selected"
+          id="sorterBtn"
         ></button>
         <ul
           id="sorterList"
