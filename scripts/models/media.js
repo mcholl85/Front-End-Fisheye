@@ -29,7 +29,7 @@ export default class Media {
   // getLiked takes an DOM mediaCard
   // add or remove a "like" when click on the icon
   getLiked(mediaCard) {
-    const icon = mediaCard.querySelector('i');
+    const icon = mediaCard.querySelector('em');
 
     mediaCard
       .querySelector('.media__article__desc__like__icon')
