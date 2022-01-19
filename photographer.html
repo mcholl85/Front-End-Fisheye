@@ -11,7 +11,7 @@
     <title>Fisheye - photographe</title>
   </head>
   <body>
-    <header class="heading" role="banner">
+    <header class="heading">
       <a href="./">
         <img
           src="assets/images/logo.png"
@@ -25,8 +25,6 @@
       <section class="sorter">
         <span id="sorterDesc" class="sorter__desc">Trier par</span>
         <button
-          role="combobox"
-          aria-autocomplete="list"
           aria-expanded="false"
           aria-controls="sorterList"
           aria-labelledby="sorterDesc sorterBtn"
@@ -52,20 +50,16 @@
       </section>
       <section class="media"></section>
       <aside class="summary">
-        <data class="summary__likes"></data>
+        <data value="" class="summary__likes"></data>
         <em class="fas fa-heart"></em>
-        <data class="summary__price"></data>
+        <data value="" class="summary__price"></data>
       </aside>
     </main>
     <section id="contact_modal">
       <div class="modal" role="dialog" aria-labelledby="titleForm">
         <header id="titleForm" class="modal__heading">
           <h1 class="modal__heading__title">Contactez-moi</h1>
-          <button
-            class="modal__heading__picture"
-            onclick="closeModal()"
-            alt="Close form"
-          >
+          <button class="modal__heading__picture" onclick="closeModal()">
             <img src="assets/icons/close.svg" alt="close img" />
           </button>
         </header>
