@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/mcholl85/Front-End-Fisheye/issues"
   },
-  "homepage": "https://github.com/mcholl85/Front-End-Fisheye#readme"
+  "homepage": "https://github.com/mcholl85/Front-End-Fisheye#readme",
+  "devDependencies": {
+    "eslint": "^8.7.0"
+  }
 }

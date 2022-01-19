@@ -37,7 +37,7 @@ export default class Movie extends Media {
       this.likes
     }</data>
     <button class="media__article__desc__like__icon" aria-label="likes">
-      <i class="${this.mediaLiked ? 'fas' : 'far'} fa-heart"></i>
+      <em class="${this.mediaLiked ? 'fas' : 'far'} fa-heart"></em>
     </button>
       </div>
     </footer>
