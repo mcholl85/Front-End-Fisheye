@@ -15,8 +15,9 @@ function displayModal() {
 
   // add the possibility to close with the space key
   document.addEventListener('keyup', (e) => {
-    if (e.key === 'Escape') {
+    if (e.key === 'escape') {
       this.closeModal();
+      console.log('test');
     }
   });
 }

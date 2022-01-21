@@ -25,10 +25,10 @@ export default class Photographer {
     }">
         <img class="user" src="${this.getPortrait()}" alt=""/>
         <h2>${this.name}</h2>
+        <p class="city">${this.city}</p>
+        <p class="tagline">${this.tagline}</p>
+        <p class="price">${this.price}€/jour</p>
       </a>
-      <p class="city">${this.city}</p>
-      <p class="tagline">${this.tagline}</p>
-      <p class="price">${this.price}€/jour</p>
       `;
     article.innerHTML = photographCard;
 
